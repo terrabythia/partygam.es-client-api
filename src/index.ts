@@ -22,9 +22,12 @@ export const onPlayersUpdate = (listener: OnPlayersUpdateListener, { immediate =
             type: PartyTimeOutgoingMessageType.REQUEST_PLAYERS_UPDATE,
         });
     }
+    return () => {
+        playersUpdateListeners = playersUpdateListeners.filter(l => l !== listener);
+    };
 };
 
-
+// TODO: add possibility to send multiple messages at once (array of messages)?
 const messageParent = (message: PartyTimeOutgoingMessage) => {
     window.parent.postMessage(
         message,
@@ -61,12 +64,30 @@ export const onMessageReceived = (listener: OnMessageReceivedListener) => {
     messageReceivedListeners = messageReceivedListeners.concat(
         listener
     );
+    return () => {
+        messageReceivedListeners = messageReceivedListeners.filter(l => l !== listener);
+    };
 };
 
-export const removeOnMessageReceivedListener = (listener: OnMessageReceivedListener) => {
-    messageReceivedListeners = messageReceivedListeners.filter(
-        l => l !== listener
-    );
+
+export const showPlayerToast = ({ message  }: { message: string }) => {
+    messageParent({
+        source: sProtocolName,
+        type: PartyTimeOutgoingMessageType.SHOW_PLAYER_TOAST,
+        payload: {
+            message
+        },
+    });
+};
+
+export const showToast = ({ message }: { message: string }) => {
+    messageParent({
+        source: sProtocolName,
+        type: PartyTimeOutgoingMessageType.SHOW_GENERAL_TOAST,
+        payload: {
+            message
+        },
+    });
 };
 
 window.addEventListener('message', (event) => {
@@ -88,7 +109,7 @@ window.addEventListener('message', (event) => {
     }
 
     if (type === PartyTimeIncomingMessageType.MESSAGE) {
-        console.log('message from server', payload);
+        console.log('message from peer or server', payload);
         // create a better json-format for messaging > one for developers use and some for internal use
         messageReceivedListeners.forEach(
             (listener) => listener(

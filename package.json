@@ -1,0 +1,15 @@
+{
+  "name": "partygam.es-client-api",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/terrabythia/partygam.es-client-api.git",
+  "author": "Sander <sanderbruggeman@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typedoc": "^0.17.4"
+  },
+  "dependencies": {
+    "typescript": "^3.8.3"
+  }
+}

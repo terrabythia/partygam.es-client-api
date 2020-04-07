@@ -6,5 +6,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="partygam.es-examples" />
     <orderEntry type="module" module-name="partygam.es-app" />
+    <orderEntry type="module" module-name="partygam.es-server" />
+    <orderEntry type="module" module-name="partygam.es-branding" />
+    <orderEntry type="module" module-name="games" />
   </component>
 </module>

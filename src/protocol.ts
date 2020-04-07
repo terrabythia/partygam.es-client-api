@@ -1,5 +1,6 @@
 export interface IPlayer {
     id: string;
+    assignedColor?: string;
     isCurrent: boolean;
     isHost: boolean;
     username: string;
@@ -11,19 +12,21 @@ export const sProtocolName = 'partygam.es';
 
 export enum PartyTimeIncomingMessageType {
     MESSAGE,
+    SHOW_TOAST,
     PLAYERS_DID_UPDATE,
 }
 
 export enum PartyTimeOutgoingMessageType {
-    BROADCAST_MESSAGE = 2,
+    BROADCAST_MESSAGE = 3,
     EMIT_MESSAGE,
     DIRECT_MESSAGE,
     REQUEST_PLAYERS_UPDATE,
+    SHOW_GENERAL_TOAST,
+    SHOW_PLAYER_TOAST,
 }
 
 export enum PartyTimeInternalMessageType {
-    SET_ROOM_ID = 6,
-    HANDSHAKE,
+    HANDSHAKE = 9,
     CONNECTIONS_DID_UPDATE ,
 }
 
