@@ -1,11 +1,16 @@
 {
-  "name": "partygam.es-client-api",
+  "name": "partygames-client-api",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "https://github.com/terrabythia/partygam.es-client-api.git",
   "author": "Sander <sanderbruggeman@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build-esm": "yarn tsc -m es6 --outDir dist/esm",
+    "build-commonjs": "yarn tsc",
+    "build": "yarn build-commonjs && yarn build-esm"
+  },
   "devDependencies": {
     "typedoc": "^0.17.4"
   },
